@@ -482,6 +482,7 @@ mod type_registry;
 mod type_uuid;
 mod type_uuid_impl;
 mod impls {
+    mod bevy_bsn;
     #[cfg(feature = "glam")]
     mod glam;
     #[cfg(feature = "bevy_math")]
@@ -494,6 +495,7 @@ mod impls {
     mod std;
     mod uuid;
 
+    pub use self::bevy_bsn::*;
     #[cfg(feature = "glam")]
     pub use self::glam::*;
     #[cfg(feature = "bevy_math")]

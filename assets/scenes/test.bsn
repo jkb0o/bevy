@@ -1,0 +1,3 @@
+Div { width: 10 } [
+    (Div { width: 20 } @"scenes/nested.bsn")
+]

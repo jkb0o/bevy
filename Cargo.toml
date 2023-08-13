@@ -34,8 +34,10 @@ default = [
   "animation",
   "bevy_asset",
   "bevy_audio",
+  "bevy_bsn",
   "bevy_gilrs",
   "bevy_scene",
+  "bevy_scene2",
   "bevy_winit",
   "bevy_core_pipeline",
   "bevy_pbr",
@@ -71,6 +73,9 @@ bevy_asset = ["bevy_internal/bevy_asset"]
 # Provides audio functionality
 bevy_audio = ["bevy_internal/bevy_audio"]
 
+# Provides BSN (Bevy Scene) format support
+bevy_bsn = ["bevy_internal/bevy_bsn"]
+
 # Provides cameras and other basic render pipeline features
 bevy_core_pipeline = ["bevy_internal/bevy_core_pipeline", "bevy_asset", "bevy_render"]
 
@@ -91,6 +96,9 @@ bevy_render = ["bevy_internal/bevy_render"]
 
 # Provides scene functionality
 bevy_scene = ["bevy_internal/bevy_scene", "bevy_asset"]
+
+# Provides scene functionality
+bevy_scene2 = ["bevy_internal/bevy_scene2", "bevy_asset"]
 
 # Provides sprite functionality
 bevy_sprite = ["bevy_internal/bevy_sprite", "bevy_render", "bevy_core_pipeline"]
@@ -1475,6 +1483,18 @@ name = "Scene"
 description = "Demonstrates loading from and saving scenes to files"
 category = "Scene"
 wasm = false
+
+[[example]]
+name = "scene2"
+path = "examples/scene/scene2.rs"
+
+[[example]]
+name = "reactive"
+path = "examples/scene/reactive.rs"
+
+[[example]]
+name = "scene_asset"
+path = "examples/scene/scene_asset.rs"
 
 # Shaders
 [[package.metadata.example_category]]

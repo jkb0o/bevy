@@ -235,7 +235,7 @@ impl<A: Asset> AssetContainer for A {
 
 /// An error that occurs when attempting to call [`LoadContext::load_direct`]
 #[derive(Error, Debug)]
-#[error("Failed to load dependency {dependency:?} {error}")]
+#[error("Failed to load dependency {dependency:?}: {error}")]
 pub struct LoadDirectError {
     pub dependency: AssetPath<'static>,
     pub error: AssetLoadError,

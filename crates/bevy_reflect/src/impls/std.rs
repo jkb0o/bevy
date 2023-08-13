@@ -1,15 +1,16 @@
 use crate::std_traits::ReflectDefault;
-use crate::{self as bevy_reflect, ReflectFromPtr, ReflectFromReflect, ReflectOwned};
+use crate::utility::{
+    reflect_hasher, GenericTypeInfoCell, GenericTypePathCell, NonGenericTypeInfoCell,
+};
+use crate::{
+    self as bevy_reflect, ReflectFromBsn, ReflectFromPtr, ReflectFromReflect, ReflectOwned,
+};
 use crate::{
     impl_type_path, map_apply, map_partial_eq, Array, ArrayInfo, ArrayIter, DynamicEnum,
     DynamicMap, Enum, EnumInfo, FromReflect, FromType, GetTypeRegistration, List, ListInfo,
     ListIter, Map, MapInfo, MapIter, Reflect, ReflectDeserialize, ReflectMut, ReflectRef,
     ReflectSerialize, TupleVariantInfo, TypeInfo, TypePath, TypeRegistration, Typed,
     UnitVariantInfo, UnnamedField, ValueInfo, VariantFieldIter, VariantInfo, VariantType,
-};
-
-use crate::utility::{
-    reflect_hasher, GenericTypeInfoCell, GenericTypePathCell, NonGenericTypeInfoCell,
 };
 use bevy_reflect_derive::impl_reflect_value;
 use std::fmt;
@@ -37,16 +38,49 @@ impl_reflect_value!(char(
     Deserialize,
     Default
 ));
-impl_reflect_value!(u8(Debug, Hash, PartialEq, Serialize, Deserialize, Default));
-impl_reflect_value!(u16(Debug, Hash, PartialEq, Serialize, Deserialize, Default));
-impl_reflect_value!(u32(Debug, Hash, PartialEq, Serialize, Deserialize, Default));
-impl_reflect_value!(u64(Debug, Hash, PartialEq, Serialize, Deserialize, Default));
+impl_reflect_value!(u8(
+    Debug,
+    Hash,
+    PartialEq,
+    Serialize,
+    Deserialize,
+    Default,
+    FromBsn
+));
+impl_reflect_value!(u16(
+    Debug,
+    Hash,
+    PartialEq,
+    Serialize,
+    Deserialize,
+    Default,
+    FromBsn
+));
+impl_reflect_value!(u32(
+    Debug,
+    Hash,
+    PartialEq,
+    Serialize,
+    Deserialize,
+    Default,
+    FromBsn
+));
+impl_reflect_value!(u64(
+    Debug,
+    Hash,
+    PartialEq,
+    Serialize,
+    Deserialize,
+    Default,
+    FromBsn
+));
 impl_reflect_value!(u128(
     Debug,
     Hash,
     PartialEq,
     Serialize,
     Deserialize,
+    FromBsn,
     Default
 ));
 impl_reflect_value!(usize(
@@ -55,7 +89,8 @@ impl_reflect_value!(usize(
     PartialEq,
     Serialize,
     Deserialize,
-    Default
+    Default,
+    FromBsn
 ));
 impl_reflect_value!(i8(Debug, Hash, PartialEq, Serialize, Deserialize, Default));
 impl_reflect_value!(i16(Debug, Hash, PartialEq, Serialize, Deserialize, Default));
@@ -85,7 +120,8 @@ impl_reflect_value!(String(
     PartialEq,
     Serialize,
     Deserialize,
-    Default
+    Default,
+    FromBsn
 ));
 impl_reflect_value!(::std::path::PathBuf(
     Debug,

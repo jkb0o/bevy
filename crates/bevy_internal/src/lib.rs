@@ -24,6 +24,12 @@ pub mod asset {
     pub use bevy_asset::*;
 }
 
+#[cfg(feature = "bevy_bsn")]
+pub mod bsn {
+    //! Load and store assets and resources for Apps.
+    pub use bevy_bsn::*;
+}
+
 pub mod core {
     //! Contains core plugins.
     pub use bevy_core::*;
@@ -71,6 +77,12 @@ pub mod reflect {
 pub mod scene {
     //! Save/load collections of entities and components to/from file.
     pub use bevy_scene::*;
+}
+
+#[cfg(feature = "bevy_scene2")]
+pub mod scene2 {
+    //! Save/load collections of entities and components to/from file.
+    pub use bevy_scene2::*;
 }
 
 pub mod tasks {

@@ -547,6 +547,11 @@ impl AssetServer {
         Some(info.path.as_ref()?.to_owned())
     }
 
+    /// Returns true if this [`AssetServer`] is watching for changes to assets.
+    pub fn is_watching_for_changes(&self) -> bool {
+        self.data._watcher.is_some()
+    }
+
     /// Retrieve a handle for the given path. This will create a handle (and [`AssetInfo`]) if it does not exist
     pub(crate) fn get_or_create_path_handle(
         &self,

@@ -62,6 +62,11 @@ impl PluginGroup for DefaultPlugins {
             group = group.add(bevy_scene::ScenePlugin);
         }
 
+        #[cfg(feature = "bevy_scene2")]
+        {
+            group = group.add(bevy_scene2::ScenePlugin);
+        }
+
         #[cfg(feature = "bevy_winit")]
         {
             group = group.add(bevy_winit::WinitPlugin);

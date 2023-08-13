@@ -15,6 +15,15 @@ pub struct AssetPath<'a> {
     pub label: Option<Cow<'a, str>>,
 }
 
+impl<'a> Default for AssetPath<'a> {
+    fn default() -> Self {
+        Self {
+            path: Default::default(),
+            label: Default::default(),
+        }
+    }
+}
+
 impl<'a> Debug for AssetPath<'a> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         Display::fmt(self, f)
@@ -134,6 +143,17 @@ impl<'a> From<&'a String> for AssetPath<'a> {
     }
 }
 
+impl From<String> for AssetPath<'static> {
+    fn from(asset_path: String) -> Self {
+        if let Some(index) = asset_path.find('#') {
+            let (path, label) = asset_path.split_at(index);
+            AssetPath::new(path.into(), Some(label.into()))
+        } else {
+            AssetPath::new(asset_path.into(), None)
+        }
+    }
+}
+
 impl<'a> From<&'a Path> for AssetPath<'a> {
     fn from(path: &'a Path) -> Self {
         AssetPath {
@@ -157,6 +177,17 @@ impl<'a> From<AssetPath<'a>> for PathBuf {
         match path.path {
             Cow::Borrowed(borrowed) => borrowed.to_owned(),
             Cow::Owned(owned) => owned,
+        }
+    }
+}
+
+#[cfg(feature = "bevy_bsn")]
+impl bevy_bsn::FromBsn for AssetPath<'static> {
+    fn from_bsn<'a>(value: bevy_bsn::BsnValue<'a>) -> Result<Self, bevy_bsn::FromBsnError> {
+        if let bevy_bsn::BsnValue::String(value) = value {
+            Ok(AssetPath::from(value).to_owned())
+        } else {
+            Err(bevy_bsn::FromBsnError::MismatchedType)
         }
     }
 }

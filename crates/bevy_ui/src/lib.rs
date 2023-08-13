@@ -17,6 +17,7 @@ mod focus;
 mod geometry;
 mod layout;
 mod render;
+pub mod scene2;
 mod stack;
 mod ui_node;
 
@@ -120,6 +121,9 @@ impl Plugin for UiPlugin {
             .register_type::<widget::Button>()
             .register_type::<widget::Label>()
             .register_type::<ZIndex>()
+            // * temporary scene2 types*
+            .register_type::<scene2::Div>()
+            .register_type::<scene2::Label>()
             .add_systems(
                 PreUpdate,
                 ui_focus_system.in_set(UiSystem::Focus).after(InputSystem),
