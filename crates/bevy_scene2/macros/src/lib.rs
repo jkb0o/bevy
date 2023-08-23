@@ -104,7 +104,7 @@ pub fn derive_schematic(input: TokenStream) -> TokenStream {
                 system: Box<dyn System<In = #struct_name #type_generics, Out = Bsn>>,
             }
 
-            impl #bevy_ecs_path::world::FromWorld for ExampleState {
+            impl #bevy_ecs_path::world::FromWorld for #state_type {
                 fn from_world(world: &mut #bevy_ecs_path::world::World) -> Self {
                     let mut system = #bevy_ecs_path::system::IntoSystem::into_system(#system_ident);
                     system.initialize(world);

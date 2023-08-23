@@ -1493,6 +1493,10 @@ name = "reactive"
 path = "examples/scene/reactive.rs"
 
 [[example]]
+name = "bsn_experiments"
+path = "examples/scene/bsn_experiments.rs"
+
+[[example]]
 name = "scene_asset"
 path = "examples/scene/scene_asset.rs"
 
